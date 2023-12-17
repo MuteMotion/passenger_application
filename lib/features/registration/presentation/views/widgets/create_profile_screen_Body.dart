@@ -88,7 +88,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                   height: 30,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 1,
+                  height: MediaQuery.of(context).size.height * 0.9,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -143,21 +143,6 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               obscureText: false,
                               controller: lastName,
                               hintText: 'Last name',
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                            child: CustomTextField(
-                              obscureText: false,
-                              controller: email,
-                              hintText: 'E-mail',
                             ),
                           ),
                         ),
@@ -354,7 +339,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                           Map<String, dynamic> requestData = {
                             "firstname": firstName.text,
                             "lastname": lastName.text,
-                            "email": email.text,
+                            "email": getUserEmail(),
                             "password": pass.text,
                             "passwordConfirm": verifPass.text,
                             "CardNumber": cardNumberController.text,
@@ -385,17 +370,17 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                             } else if (response.statusCode == 400) {
                               _showErrorDialog(
                                   context,
-                                  "Email Already Exist",
+                                  "This Email is Already Exist",
                                   firstName,
                                   lastName,
-                                  email,
+                                  // email,
                                   pass,
                                   verifPass,
                                   cardNumberController,
                                   expiryDateController,
                                   cvvController,
                                   phone);
-                            } else {
+
                               print(
                                   'Request failed with status: ${response.statusCode}');
                               print('Response: ${response.body}');
@@ -405,7 +390,6 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                           }
                         }
                       },
-                     
                       child: Text(
                         "Done",
                         style: GoogleFonts.comfortaa(
@@ -426,7 +410,6 @@ void _showErrorDialog(
   String message,
   TextEditingController firstName,
   TextEditingController lastName,
-  TextEditingController email,
   TextEditingController pass,
   TextEditingController verifPass,
   TextEditingController cardNumberController,
@@ -438,42 +421,59 @@ void _showErrorDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        content: Container(
-          decoration: BoxDecoration(
-            color: kPrimaryColor,
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            message,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 20, fontFamily: 'Comfortaa', color: Colors.white),
-          ),
+        content:
+            //  Container(
+            //   decoration: BoxDecoration(
+            //     color: kPrimaryColor,
+            //     borderRadius: BorderRadius.circular(20.0),
+            //   ),
+            //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //   child:
+            Text(
+          message,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
+          // ),
         ),
         actions: [
           TextButton(
             onPressed: () {
               firstName.clear();
               lastName.clear();
-              email.clear();
+              // email.clear();
               verifPass.clear();
               cardNumberController.clear();
               expiryDateController.clear();
               cvvController.clear();
               pass.clear();
               phone.clear();
-              Navigator.of(context).pop(); // Close the dialog
+              Navigator.of(context).pop();
+              navigateTo(context, LoginScreenView());
+              // Close the dialog
             },
-            child: Text(
-              'OK',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 20, fontFamily: 'Comfortaa', color: Colors.white),
+            child: Container(
+              width: 120,
+              height: 45,
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text(
+                  'Try Again',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Comfortaa',
+                      color: Colors.white),
+                ),
+              ),
             ),
           ),
         ],

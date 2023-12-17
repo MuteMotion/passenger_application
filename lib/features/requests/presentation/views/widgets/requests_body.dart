@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:intl/intl.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
 
@@ -99,7 +101,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                                 backgroundColor: const Color(0xff316F89),
                               ),
                               onPressed: () {
-                                navigateTo(context, Requests());
+                                navigateTo(context, RequestsScreenView());
                               },
                               child: Column(
                                 children: [
@@ -129,7 +131,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                         ),
                       ),
                       const SizedBox(
-                        width: 25,
+                        width: 20,
                       ),
                       SizedBox(
                         child: Stack(
@@ -143,7 +145,9 @@ class _RequestsBodyState extends State<RequestsBody> {
                                 minimumSize: const Size(40, 70),
                                 backgroundColor: kPrimaryColor,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                navigateTo(context, RequestsScreenVieww());
+                              },
                               child: Column(
                                 children: [
                                   SizedBox(

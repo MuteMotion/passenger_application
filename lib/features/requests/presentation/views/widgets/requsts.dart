@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
+
 import 'package:intl/intl.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
 
 class Requests extends StatefulWidget {
@@ -95,11 +97,13 @@ class _RequestsState extends State<Requests> {
                                 minimumSize: const Size(40, 70),
                                 backgroundColor: kPrimaryColor,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                navigateTo(context, RequestsScreenView());
+                              },
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: 8,
+                                    height: 7,
                                   ),
                                   Text(
                                     'Transport',
@@ -124,7 +128,7 @@ class _RequestsState extends State<Requests> {
                         ),
                       ),
                       const SizedBox(
-                        width: 25,
+                        width: 20,
                       ),
                       SizedBox(
                         child: Stack(
@@ -139,7 +143,7 @@ class _RequestsState extends State<Requests> {
                                 backgroundColor: const Color(0xff316F89),
                               ),
                               onPressed: () {
-                                navigateTo(context, RequestsScreenView());
+                                navigateTo(context, RequestsScreenVieww());
                               },
                               child: Column(
                                 children: const [

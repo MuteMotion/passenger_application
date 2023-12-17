@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mute_motion_passenger">
+    <uses-permission android:name = "android.permission.INTERNET" />
    <application
         android:label="mute_motion_passenger"
         android:name="${applicationName}"

@@ -25,7 +25,7 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       validator: (data) {
         if (data!.isEmpty) {
-          return 'value is wrong';
+          return 'This field must not be empty';
         }
         return null;
       },
