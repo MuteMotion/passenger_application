@@ -17,6 +17,7 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/w
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/custom_drop_down.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateProfileScreenBody extends StatefulWidget {
   CreateProfileScreenBody({super.key});
@@ -383,6 +384,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                           setState(() {
                             _isLoading = true;
                           });
+                        
                           String url =
                               'https://mutemotion.onrender.com/api/v1/passenger/signup';
                           Map<String, dynamic> requestData = {
@@ -413,6 +415,15 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               print('Request successful');
                               print('Response: ${response.body}');
                               setUserEmail(email.text);
+                              final SharedPreferences prefs = await SharedPreferences.getInstance();
+       /*  await prefs.setString("token", response.data["token"]);
+        String? token = prefs.getString("token");
+        print("Token is : $token");
+        print("after");
+        await prefs.setString("_id", response.data["user"]["_id"]);
+        String? id = prefs.getString("_id");
+        print("Id is : $id");
+        print('after222'); */
                               navigateTo(
                                 context,
                                 OTPScreenView(),
@@ -482,13 +493,6 @@ void _showErrorDialog(
           borderRadius: BorderRadius.circular(20.0),
         ),
         content:
-            //  Container(
-            //   decoration: BoxDecoration(
-            //     color: kPrimaryColor,
-            //     borderRadius: BorderRadius.circular(20.0),
-            //   ),
-            //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            //   child:
             Text(
           message,
           textAlign: TextAlign.center,

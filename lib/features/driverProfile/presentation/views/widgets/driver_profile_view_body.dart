@@ -28,8 +28,8 @@ class DriverProfileViewBody extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
+          //height: MediaQuery.of(context).size.height*1,       
+             width: double.infinity,
           padding: const EdgeInsets.only(
             top: 20,
             left: 15,
@@ -49,7 +49,7 @@ class DriverProfileViewBody extends StatelessWidget {
                 Text(
                   "Driver will be in your destination ",
                   style: GoogleFonts.comfortaa(
-                    fontSize: 12,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: kPrimaryColor,
                   ),
@@ -57,7 +57,7 @@ class DriverProfileViewBody extends StatelessWidget {
                 Text(
                   "After 15mins (2000m) ",
                   style: GoogleFonts.comfortaa(
-                    fontSize: 12,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Color(0xff760F07),
                   ),
@@ -75,7 +75,7 @@ class DriverProfileViewBody extends StatelessWidget {
                 Text(
                   "Hassan Mohamed ",
                   style: GoogleFonts.comfortaa(
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: kPrimaryColor,
                   ),
@@ -94,7 +94,7 @@ class DriverProfileViewBody extends StatelessWidget {
                     Text(
                       "4.9 (123 Reviewers)",
                       style: GoogleFonts.comfortaa(
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.black.withOpacity(0.7),
                       ),
@@ -122,17 +122,17 @@ class DriverProfileViewBody extends StatelessWidget {
                           Text(
                             "Toyota Corolla",
                             style: GoogleFonts.comfortaa(
-                                fontSize: 7, color: Colors.white),
+                                fontSize: 10, color: Colors.white),
                           ),
                           Text(
                             "Color: white   Model: 2020 ",
                             style: GoogleFonts.comfortaa(
-                                fontSize: 7, color: Colors.white),
+                                fontSize: 10, color: Colors.white),
                           ),
                           Text(
                             "( Automatic - Comfort - 4 seats)",
                             style: GoogleFonts.comfortaa(
-                                fontSize: 7, color: Colors.white),
+                                fontSize: 10, color: Colors.white),
                           ),
                         ],
                       ),
@@ -165,7 +165,7 @@ class DriverProfileViewBody extends StatelessWidget {
                         style: GoogleFonts.comfortaa(
                           fontWeight: FontWeight.w600,
                           color: kPrimaryColor,
-                          fontSize: 10,
+                          fontSize: 12,
                         ),
                       ),
                     ],
@@ -194,7 +194,7 @@ class DriverProfileViewBody extends StatelessWidget {
                         style: GoogleFonts.comfortaa(
                           fontWeight: FontWeight.w600,
                           color: kPrimaryColor,
-                          fontSize: 10,
+                          fontSize: 12,
                         ),
                       ),
                     ],
@@ -252,6 +252,7 @@ class DriverProfileViewBody extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 20,),
               ],
             ),
           ),

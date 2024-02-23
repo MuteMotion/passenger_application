@@ -7,7 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../mainMenu/presentation/views/mainMenu_screen_view.dart';
 
 class LoginUserApi {
-  static const loginUserUrl = "https://mutemotion.onrender.com/api/v1/passenger/login";
+  static const loginUserUrl =
+      "https://mutemotion.onrender.com/api/v1/passenger/login";
   userLogin(
       {required BuildContext context,
       required TextEditingController emailcont,
@@ -26,14 +27,17 @@ class LoginUserApi {
           MainMenuScreenView(),
         );
         print(response.data["token"]);
+                print(response.data["user"]["_id"]);
+
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString("token", response.data["token"]);
-        await prefs.setString("id", response.data["id"]);
         String? token = prefs.getString("token");
-        String? id = prefs.getString("id");
         print("Token is : $token");
-         print("Id is : $id");
-         print("after");
+        print("after");
+        await prefs.setString("_id", response.data["user"]["_id"]);
+        String? id = prefs.getString("_id");
+        print("Id is : $id");
+        print('after222');
       }
     } catch (e) {
       if (e is DioException) {
@@ -64,7 +68,6 @@ void _showErrorDialog(
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
-          
         ),
         actions: [
           TextButton(
@@ -81,7 +84,7 @@ void _showErrorDialog(
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: const Padding(
-                padding:  EdgeInsets.only(top: 5),
+                padding: EdgeInsets.only(top: 5),
                 child: Text(
                   'OK',
                   textAlign: TextAlign.center,
