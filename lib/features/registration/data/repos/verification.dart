@@ -59,6 +59,8 @@ class Verification {
         String? token = prefs.getString("token");
         print("Token is : $token");
         await prefs.setString("_id", response.data["user"]["_id"]);
+        await prefs.setString("firstname", response.data["user"]["firstname"]);
+        await prefs.setString("email", response.data["user"]["email"]);
 
         String? id = prefs.getString("_id");
         print("Id is : $id");
@@ -73,10 +75,6 @@ class Verification {
         _showErrorDialog(
             context, 'Invalid verification code', code1, code2, code3, code4);
       }
-      //final SharedPreferences prefs = await SharedPreferences.getInstance();
-      /*  await prefs.setString("token", response.data["model"]["tokens"]["accessToken"]);
-  String? token = prefs.getString("token");
-  print("Token is : $token"); */
     } catch (e) {
       print(e);
       if (e is DioException) {

@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
        
       ), */
       debugShowCheckedModeBanner: false,
-      home: map(),
+      home: LoginScreenView(),
     );
   }
 }

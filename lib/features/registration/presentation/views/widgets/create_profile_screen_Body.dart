@@ -95,7 +95,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                         height: 45,
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.90,
+                        height: MediaQuery.of(context).size.height * 0.85,
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: kPrimaryColor,
@@ -108,15 +108,15 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               const SizedBox(height: 70),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Upload Image',
-                                  style: Styles.textStyle12.copyWith(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
+                              // TextButton(
+                              //   onPressed: () {},
+                              //   child: Text(
+                              //     'Upload Image',
+                              //     style: Styles.textStyle12.copyWith(
+                              //       color: Colors.white,
+                              //     ),
+                              //   ),
+                              // ),
                               const SizedBox(height: 4),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -466,12 +466,12 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                     ],
                   ),
                   Positioned(
-                    bottom: 735,
-                    left: 120,
+                    bottom: 705,
+                    left: 130,
                     child: const CircleAvatar(
                       backgroundColor: Colors.white,
                       backgroundImage: AssetImage('assets/images/person.png'),
-                      radius: 60,
+                      radius: 55,
                     ),
                   ),
                 ],

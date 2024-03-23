@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/profile/model/model.dart';
+import 'package:mute_motion_passenger/features/profile/presentation/views/widgets/icon.dart';
 import 'package:mute_motion_passenger/features/profile/service/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +26,8 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
   );
 
   bool _isLoading = false;
+  final ImagePicker _picker = ImagePicker();
+  Uint8List? _selectedImageBytes;
 
   @override
   void initState() {
@@ -49,6 +56,32 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
     setState(() {
       _isLoading = false;
     });
+  }
+
+  void _takePhoto() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.camera);
+    // Open the camera and capture a photo
+    if (pickedFile != null) {
+      final File imageFile = File(pickedFile.path);
+      final bytes = await imageFile.readAsBytes();
+      setState(() {
+        _selectedImageBytes = bytes;
+      });
+    }
+  }
+
+  void _openGallery() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+    // Open the gallery and select an image
+    if (pickedFile != null) {
+      final File imageFile = File(pickedFile.path);
+      final bytes = await imageFile.readAsBytes();
+      setState(() {
+        _selectedImageBytes = bytes;
+      });
+    }
   }
 
   @override
@@ -189,7 +222,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                       SizedBox(
                         height: 20,
                       ),
-                      Info(title: 'Full Name', subTitle: _userData.fullName),
+                      Info(title: 'Name', subTitle: _userData.fullName),
                       Divider(
                         indent: 5,
                         endIndent: 5,
@@ -197,7 +230,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                         height: 2,
                       ),
                       Info(
-                        title: 'E-mail',
+                        title: 'Email',
                         subTitle: _userData.email,
                       ),
                       Divider(
@@ -235,7 +268,10 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                     CircleAvatar(
                       radius: 70,
                       backgroundColor: Colors.white,
-                      backgroundImage: AssetImage('assets/images/woman.png'),
+                      backgroundImage: _selectedImageBytes != null
+                          ? MemoryImage(_selectedImageBytes!)
+                          : AssetImage('assets/images/woman.png')
+                              as ImageProvider<Object>?,
                     ),
                     Stack(
                       alignment: AlignmentDirectional.center,
@@ -245,12 +281,26 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                           backgroundColor: kPrimaryColor,
                         ),
                         IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.camera,
-                              color: Colors.white,
-                              size: 24,
-                            ))
+                          onPressed: () {
+                            showModalBottomSheet(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                )),
+                                isScrollControlled: true,
+                                context: context,
+                                builder: ((builder) => ButtomSheet(
+                                      takePhoto: _takePhoto,
+                                      openGallery: _openGallery,
+                                    )));
+                          },
+                          icon: Icon(
+                            Icons.camera,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                        ),
                       ],
                     ),
                   ],

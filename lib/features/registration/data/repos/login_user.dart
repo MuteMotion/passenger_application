@@ -27,7 +27,7 @@ class LoginUserApi {
           MainMenuScreenView(),
         );
         print(response.data["token"]);
-                print(response.data["user"]["_id"]);
+        print(response.data["user"]["_id"]);
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString("token", response.data["token"]);
@@ -35,6 +35,8 @@ class LoginUserApi {
         print("Token is : $token");
         print("after");
         await prefs.setString("_id", response.data["user"]["_id"]);
+        await prefs.setString("firstname", response.data["user"]["firstname"]);
+        await prefs.setString("email", response.data["user"]["email"]);
         String? id = prefs.getString("_id");
         print("Id is : $id");
         print('after222');
